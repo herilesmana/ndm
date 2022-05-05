@@ -1,0 +1,24 @@
+{
+    "name": "ndm",
+    "version": "0.0.1",
+    "description": "Network Device Manager by Heri Lesmana",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Heri Lesmana",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/herilesmana/ndm.git"
+    },
+    "bugs": {
+      "url": "https://github.com/herilesmana/ndm/issues"
+    },
+    "homepage": "https://github.com/herilesmana/ndm#readme",
+    "devDependencies": {
+      "electron": "^18.2.0",
+      "electron-packager": "^15.5.1"
+    }
+  }
