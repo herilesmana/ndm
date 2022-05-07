@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen } = require('electron')
+const { app, BrowserWindow, screen, Tray, Menu } = require('electron')
 const path = require('path')
 const url = require('url')
 
@@ -15,8 +15,8 @@ function createWindow () {
     win = new BrowserWindow({
         width: 400,
         height: 300,
-        x: width - 400,
-        y: height - 400,
+        x: width - 410,
+        y: height - 320,
         webPreferences: {
             nodeIntegration: true
         },
@@ -24,6 +24,7 @@ function createWindow () {
         title: 'Network Device Monitoring',
         backgroundColor: '#ffffff',
         frame: false,
+        alwaysOnTop: true,
         resizable: false,
     })
 
@@ -43,9 +44,24 @@ function createWindow () {
     })
 
     // Emit the event when the window is closed
-    win.on('closed', () => {
-        win = null
+    // win.on('closed', () => {
+    //     win = null
+    // })
+
+    win.on('minimize', (event) => {
+        event.preventDefault()
+        win.hide()
     })
+    
+    win.on('close', (event) => {
+        if(!app.isQuiting) {
+            event.preventDefault()
+            win.hide()
+        }
+
+        return false
+    })
+    
 }
 
 
@@ -71,4 +87,33 @@ app.on('activate', () => {
     if (win === null) {
         createWindow()
     }
+})
+
+
+let tray = null
+app.whenReady().then(() => {
+    tray = new Tray(path.join(__dirname, 'assets/icons/png/24x24.png'))
+    const contextMenu = Menu.buildFromTemplate([
+        {
+            label: 'Show',
+            click: () => {
+                win.show()
+            }
+        },
+        {
+            label: 'Hide',
+            click: () => {
+                win.hide()
+            }
+        },
+        {
+            label: 'Quit',
+            click: () => {
+                app.isQuiting = true
+                app.quit()
+            }
+        }
+    ])
+    tray.setToolTip('Network Device Monitoring')
+    tray.setContextMenu(contextMenu)
 })
