@@ -2,8 +2,9 @@
     "name": "ndm",
     "version": "0.0.1",
     "description": "Network Device Manager by Heri Lesmana",
-    "main": "index.js",
+    "main": "main.js",
     "scripts": {
+      "start": "electron .",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
