@@ -7,9 +7,58 @@
     <link rel="stylesheet" href="/assets/css/styles.css">
     <title>Network Device Monitoring</title>
 </head>
-<body>
-    <h1 class="text-red-800">This text is styled by tailwind css</h1>
-
-    <script type="module" src="/assets/js/scripts.js"></script>
+<body class="bg-gray-900">
+    <div class="mx-5 mt-3 flex justify-between">
+        <h1 class="text-gray-200 text-xl font-semibold flex">
+            <div class="bg-gray-200 rounded-full">
+                <img class="h-8 w-8" src="/assets/icons/png/24x24.png" alt="Logo NDM">
+            </div>
+            <span class="ml-2">Network Device Monitoring</span>
+        </h1>
+        <button id="minimize-button" class="py-0 px-1 hover:bg-slate-800 transition duration-100">
+            <svg class="p-0 m-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path class="fill-gray-400" d="M21 13H3C2.4 13 2 12.6 2 12C2 11.4 2.4 11 3 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13Z" fill="currentColor"/>
+            </svg>
+        </button>
+    </div>
+    <div class="w-full border-t border-slate-700 mt-3"></div>
+    <div class="p-5 m-5 bg-gray-700 backdrop-blur-xl rounded flex flex-col">
+        <div class="flex">
+            <button class="p-1 px-3 bg-gray-300 hover:bg-yellow-400 transition duration-100 rounded flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path class="fill-emerald-600" d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/>
+                </svg>
+                <span>Start</span>
+            </button>
+            <button class="ml-2 p-1 px-3 bg-gray-300 hover:bg-yellow-400 transition duration-100 rounded flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <circle class="fill-red-600" fill="currentColor" cx="12" cy="12" r="8"/>
+                </svg>
+                <span>Stop</span>
+            </button>
+        </div>
+        <div class="mt-3 flex">
+            <span class="bg-emerald-400 px-5 text-emerald-900">Running...</span>
+            <button class="flex ml-2 bg-gray-300 hover:bg-yellow-400 transition duration-100 rounded-sm px-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path opacity="0.3" d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor"/>
+                    <rect x="21.9497" y="3.46448" width="13" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" fill="currentColor"/>
+                    <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"/>
+                </svg>
+                <span class="ml-1">Open app</span>
+            </button>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const { ipcRenderer } = require('electron');
+            
+            document.querySelector('#minimize-button').addEventListener('click', (event) => {
+                event.preventDefault()
+                ipcRenderer.send('minimize-window')
+            })
+        })()
+    </script>
+    <script src="/assets/js/scripts.js"></script>
 </body>
 </html>

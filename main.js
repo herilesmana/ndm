@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, Tray, Menu } = require('electron')
+const { app, BrowserWindow, screen, Tray, Menu, ipcMain } = require('electron')
 const isDev = require('electron-is-dev');
 const path = require('path')
 
@@ -16,14 +16,16 @@ function createWindow () {
         width: 400,
         height: 300,
         x: width - 410,
-        y: height - 320,
+        y: height - 370,
         webPreferences: {
-            nodeIntegration: true
+            preload: path.join(__dirname, 'preload.js'),
+            nodeIntegration: true,
+            contextIsolation: false
         },
         icon: path.join(__dirname, 'assets/icons/png/24x24.png'),
         title: 'Network Device Monitoring',
         backgroundColor: '#ffffff',
-        // frame: false,
+        frame: false,
         alwaysOnTop: true,
         resizable: false,
         autoHideMenuBar: true,
@@ -36,7 +38,7 @@ function createWindow () {
     )
 
     // Open the DevTools.
-    // win.webContents.openDevTools()
+    // win.webContents.openDevTools('detach')
 
     // Emit the event when the window is ready to be shown
     win.once('ready-to-show', () => {
@@ -116,4 +118,8 @@ app.whenReady().then(() => {
     ])
     tray.setToolTip('Network Device Monitoring')
     tray.setContextMenu(contextMenu)
+})
+
+ipcMain.on('minimize-window', () => {
+    win.minimize()
 })
