@@ -1,6 +1,6 @@
 const { app, BrowserWindow, screen, Tray, Menu } = require('electron')
+const isDev = require('electron-is-dev');
 const path = require('path')
-const url = require('url')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -23,17 +23,17 @@ function createWindow () {
         icon: path.join(__dirname, 'assets/icons/png/24x24.png'),
         title: 'Network Device Monitoring',
         backgroundColor: '#ffffff',
-        frame: false,
+        // frame: false,
         alwaysOnTop: true,
         resizable: false,
+        autoHideMenuBar: true,
     })
 
     // and load the index.html of the app.
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, 'web/index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
+    win.loadURL(isDev
+        ? 'http://localhost:3000'
+        : `file://${path.join(__dirname, '../build/index.html')}`
+    )
 
     // Open the DevTools.
     // win.webContents.openDevTools()

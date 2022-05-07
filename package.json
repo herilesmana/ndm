@@ -4,22 +4,29 @@
     "description": "Network Device Manager by Heri Lesmana",
     "main": "main.js",
     "scripts": {
-      "start": "electron .",
-      "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "vite",
+        "build": "vite build",
+        "dev": "concurrently -k \"npm start\" \"npm:electron\"",
+        "electron": "wait-on tcp:3000 && electron .",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
     "author": "Heri Lesmana",
     "license": "MIT",
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/herilesmana/ndm.git"
+        "type": "git",
+        "url": "git+https://github.com/herilesmana/ndm.git"
     },
     "bugs": {
-      "url": "https://github.com/herilesmana/ndm/issues"
+        "url": "https://github.com/herilesmana/ndm/issues"
     },
     "homepage": "https://github.com/herilesmana/ndm#readme",
     "devDependencies": {
-      "electron": "^18.2.0",
-      "electron-packager": "^15.5.1"
+        "concurrently": "^7.1.0",
+        "electron": "^18.2.0",
+        "electron-is-dev": "^2.0.0",
+        "electron-packager": "^15.5.1",
+        "vite": "^2.9.8",
+        "wait-on": "^6.0.1"
     }
-  }
+}
